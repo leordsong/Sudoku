@@ -9,7 +9,7 @@ void fillNineNinePuzzle(int puzzle[N][N])
 	{
 		for (int j = 0; j < N; j++) 
 		{
-			cout << "Please number on row " << i + 1 << " column " << j + 1 << ": ";
+			cout << "Please enter number on row " << i + 1 << " column " << j + 1 << ": ";
 			cin >> puzzle[i][j];
 		}
 	}
