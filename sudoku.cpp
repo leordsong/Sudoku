@@ -5,7 +5,6 @@ using namespace std;
 void fillNineNinePuzzle(int puzzle[N][N]) 
 {
 	cout << "Welcome to Sudoku!" << endl;
-	cout << "Welcome to Sudoku!" << endl;
 	ifstream infile("puzzle.txt");
 	int i = 0;
 	while (infile 
