@@ -13,11 +13,14 @@ void next(int *x, int *y);
 bool getNext(int puzzle[N][N], int *x, int *y);
 bool solve(int puzzle[N][N], const int x, const int y);
 
+//====== Main ======//
+
 int main()
 {
 	int puzzle[N][N] = { 0 };
 	string fileName;
 
+	// read
 	cout << "Welcome to Sudoku!" << endl;
 	cout << "Enter file name: ";
 	getline (cin, fileName);
@@ -25,17 +28,27 @@ int main()
 	printPuzzle(puzzle);
 	cout << endl;
 
+	// solve
 	int x = 0, y = 0, count = 0;
 	while (getNext(puzzle, &x, &y) && (count++ < 1000))
 	{
 		if (!solve(puzzle, x, y)) next(&x, &y);
 	}
+
+	// end
 	if (getNext(puzzle, &x, &y)) cout << "Fail!" << endl;
 	else cout << "Success!" << endl;
 	printPuzzle(puzzle);
 	return 0;
 }
 
+//====== Function Body ======//
+
+/**
+ * Read sudouku from given file
+ * @param fileName the name of file to open
+ * @param puzzle a two dimentional array that reprensents a sudouku
+ */
 void fillNineNinePuzzle(string fileName, int puzzle[N][N])
 {
 	ifstream infile(fileName + ".txt");
@@ -88,18 +101,21 @@ bool solve(int puzzle[N][N], const int x, const int y) {
 
 	int result[N] = { 0 };
 	for (int i = 0; i < N; i++) result[i] = i + 1;
+
 	// row
 	for (int i = 0; i < N; i++)
 	{
 		int value = puzzle[x][i];
 		if (value != 0) result[value - 1] = 0;
 	}
+
 	// column
 	for (int j = 0; j < N; j++)
 	{
 		int value = puzzle[j][y];
 		if (value != 0) result[value - 1] = 0;
 	}
+	
 	// area
 	int row = x / 3;
 	row = row * 3;

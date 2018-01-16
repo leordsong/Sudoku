@@ -1,4 +1,4 @@
-# Windows image file caches
+*.out
 *.exe
 *.o
 
