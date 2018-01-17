@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 class Node {
     int x;
@@ -16,7 +15,7 @@ public:
     void setNext(Node* newNext);
     Node* getNext();
     int getSize();
-    std::string toString();
+    void print();
 };
 
 class NodeContainer {
@@ -29,4 +28,5 @@ public:
     bool isEmpty();
     void print();
     Node* pop();
+    Node* popAt(int x, int y);
 };

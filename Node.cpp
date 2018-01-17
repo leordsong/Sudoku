@@ -2,70 +2,75 @@
 
 using namespace std;
 
-Node::Node(int newX, int newY, int newValues[9], int newLength):x(newX), y(newY), length(newLength), next(nullptr) {
-    length = 0;
-    for (int i = 0; i < 9; i++) {
-        if (newValues[i] > 0) {
-            length++;
-        }
-    }
+Node::Node(int newX, int newY, int newValues[9], int newLength)
+{
+    x = newX;
+    y = newY;
+    next = nullptr;
+    length = newLength;
     values = new int[length];
     int j = 0;
-    for (int i = 0; i < 9; i++) {
-        if (newValues[i] > 0) {
+    for (int i = 0; i < 9; i++)
+    {
+        if (newValues[i] > 0)
+        {
             values[j] = newValues[i];
             j++;
         }
     }
 };
 
-Node::~Node() {
+Node::~Node()
+{
     delete values;
 };
 
-int Node::getX() {
+int Node::getX()
+{
     return x;
 }
 
-int Node::getY() {
+int Node::getY()
+{
     return y;
 }
 
-int* Node::getValues() {
+int* Node::getValues()
+{
     return values;
 }
 
-void Node::setNext(Node* newNext) {
+void Node::setNext(Node* newNext)
+{
     next = newNext;
 }
 
-Node* Node::getNext() {
+Node* Node::getNext()
+{
     return next;
 }
 
-int Node::getSize() {
+int Node::getSize()
+{
     return length;
 }
 
-string Node::toString() {
-    string result = "(";
-    result += to_string(x);
-    result += ", ";
-    result += to_string(y);
-    result += ", [";
+void Node::print()
+{
+    cout << '(' << x << ", " << y << ", [";
     int* next = values;
     for (int i = 0; i < length; i++) {
-        if (next != values) result += ", ";
-        result += to_string(*next);
+        if (next != values) cout << ", ";
+        cout << *next;
         next = next + 1;
     }
-    result += "])";
-    return result;
+    cout << "])";
 }
 
 NodeContainer::NodeContainer(Node* newHead): head(newHead) {};
 
-NodeContainer::~NodeContainer() {
+NodeContainer::~NodeContainer()
+{
     Node* next = head;
     while (next) {
         head = next->getNext();
@@ -74,15 +79,18 @@ NodeContainer::~NodeContainer() {
     }
 }
 
-Node* NodeContainer::getHead() {
+Node* NodeContainer::getHead()
+{
     return head;
 }
 
-bool NodeContainer::isEmpty() {
+bool NodeContainer::isEmpty()
+{
     return head == nullptr;
 }
 
-void NodeContainer::add(Node* newOne) {
+void NodeContainer::add(Node* newOne)
+{
     if (!newOne) return;
     if (!head || newOne->getSize() <= head->getSize()) {
         newOne->setNext(head);
@@ -99,22 +107,51 @@ void NodeContainer::add(Node* newOne) {
     newOne->setNext(next);
 }
 
-void NodeContainer::print() {
+void NodeContainer::print()
+{
     Node* next = head;
     while (next) {
-        cout << next->toString() << "->";
+        next->print();
+        cout << "->";
         next = next->getNext();
     }
     cout << "NULL" << endl;
 }
 
-Node* NodeContainer::pop() {
+Node* NodeContainer::pop()
+{
     Node* next = head;
     if (next) {
         head = next->getNext();
         next->setNext(nullptr);
     }
     return next;
+}
+
+Node* NodeContainer::popAt(int x, int y)
+{
+    Node* next = head;
+    if (next && next->getX() == x && next->getY() == y)
+    {
+        head = next->getNext();
+        next->setNext(nullptr);
+        return next;
+    }
+
+    Node* prev = nullptr;
+    while (next && (next->getX() != x || next->getY() != y))
+    {
+        prev = next;
+        next = next->getNext();
+    }
+
+    if (prev && next)
+    {
+        prev->setNext(next->getNext());
+        next->setNext(nullptr);
+        return next;
+    }
+    return nullptr;
 }
 
 
