@@ -57,27 +57,32 @@ int main() {
                     puzzle[node->getX()][node->getY()] = node->getValues()[i];
                 }
             }
-            if (success) {
-                break;
-            }
-            old = new NodeContainer(node);
-            while (!success && !container->isEmpty()) {
-                node = container->pop();
-                for (int i = 0; i < node->getSize() && !success; i++) {
-                    if (isProper(puzzle, container->getHead(), node->getX(), node->getY(), node->getValues()[i])) {
-                        success = true;
-                        puzzle[node->getX()][node->getY()] = node->getValues()[i];
+            if (!success) {
+                old = new NodeContainer(nullptr);
+                while (!success && !container->isEmpty())
+                {
+                    // TODO bad guess
+                    old->add(node);
+                    node = container->pop();
+                    for (int i = 0; i < node->getSize() && !success; i++) {
+                        if (isProper(puzzle, container->getHead(), node->getX(), node->getY(), node->getValues()[i]) &&
+                            isProper(puzzle, old->getHead(), node->getX(), node->getY(), node->getValues()[i])) {
+                            success = true;
+                            puzzle[node->getX()][node->getY()] = node->getValues()[i];
+                        }
                     }
                 }
-            }
-
-            if (!success)
-            {
-                break;
-            } else
-            {
+                
+                while (!old->isEmpty())
+                {
+                    container->add(old->pop());
+                }
                 delete old;
+                
+                if (!success)
+                    break;
             }
+            
         }
         delete node;
         old = container;
