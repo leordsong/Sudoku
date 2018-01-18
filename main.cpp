@@ -36,7 +36,8 @@ int isHiddenSingle(Node* node, NodeContainer* container) {
                 container->add(temp);
             }
         }
-        if (success) return i;
+        if (success)
+            return i;
         // if in column, return i
         success = true;
         for (int j = 0; j < N && success; j++)
@@ -51,7 +52,8 @@ int isHiddenSingle(Node* node, NodeContainer* container) {
                 container->add(temp);
             }
         }
-        if (success) return i;
+        if (success)
+            return i;
         // if in area, return i
         success = true;
         int row = node->getX() / 3;
@@ -73,7 +75,8 @@ int isHiddenSingle(Node* node, NodeContainer* container) {
                 }
             }
         }
-        if (success) return i;
+        if (success)
+            return i;
     }
     return -1;
 }
@@ -95,7 +98,7 @@ int main() {
     int length = 0;
     int solutions[N] = {};
     NodeContainer* container = new NodeContainer(nullptr);
-    for (int x = 0, y = 0; x != 8 || y != 8; next(&x, &y))
+    for (int x = 0, y = 0; x < 9; next(&x, &y))
     {
         if (puzzle[x][y] == 0)
         {
@@ -103,7 +106,7 @@ int main() {
             container->add(new Node(x, y, solutions, length));
         }
     }
-
+    
     // solve
     Node* node = nullptr;
     bool success = false;

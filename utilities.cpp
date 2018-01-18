@@ -30,7 +30,7 @@ void next(int *x, int *y)
 	if (*y == N - 1)
 	{
 		*y = 0;
-		*x = (*x == N - 1) ? 0 : *x + 1;
+		*x = *x + 1;
 	}
 	else
 	{
