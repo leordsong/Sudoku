@@ -1,4 +1,6 @@
-#include <iostream>
+#ifndef N
+#define N 9
+#endif
 
 class Node {
     int x;
@@ -7,7 +9,7 @@ class Node {
     int length;
     Node* next;
 public:
-    Node(int newX, int newY, int newValues[9], int length);
+    Node(int newX, int newY, int newValues[N], int length);
     ~Node();
     int getX();
     int getY();

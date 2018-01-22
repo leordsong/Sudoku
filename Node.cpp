@@ -1,12 +1,11 @@
+#include <iostream>
 #include "Node.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
 
-Node::Node(int newX, int newY, int newValues[9], int newLength)
+Node::Node(int newX, int newY, int newValues[9], int newLength): x(newX), y(newY), next(nullptr)
 {
-    x = newX;
-    y = newY;
-    next = nullptr;
     length = newLength;
     values = new int[length];
     int j = 0;
