@@ -1,6 +1,6 @@
-*.out
-*.exe
-*.o
+**/*.out
+**/*.exe
+**/*.o
 
 # =========================
 # Operating System Files
@@ -9,4 +9,4 @@
 # OSX
 # =========================
 
-.DS_Store
+**/.DS_Store
