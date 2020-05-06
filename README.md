@@ -1,3 +1,10 @@
 # Sudoku
 
-A solution to sudoku! Enter number and solve.
+A solution to sudoku!
+
+## Classic hard code approach
+check ./cpp
+
+## Reinforcement Learning approach
+
+check ./RL
